@@ -66,9 +66,9 @@ module RubyAMI
       @socket.write data
     end
 
-    def send_action(name, headers = {}, error_handler = self.method(:abort))
+    def send_action(name, headers = {}, action_id = nil, error_handler = self.method(:abort))
       condition = Celluloid::Condition.new
-      action = dispatch_action name, headers do |response|
+      action = dispatch_action name, headers, action_id do |response|
         condition.signal response
       end
       condition.wait
