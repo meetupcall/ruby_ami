@@ -5,10 +5,10 @@ module RubyAMI
     CAUSAL_EVENT_NAMES = %w[queuestatus sippeers iaxpeers parkedcalls dahdishowchannels coreshowchannels
                             dbget status agents konferencelist confbridgelist confbridgelistrooms] unless defined? CAUSAL_EVENT_NAMES
 
-    def initialize(name, headers = {}, &block)
+    def initialize(name, headers = {}, action_id=nil, &block)
       @name       = name.to_s.downcase.freeze
       @headers    = headers.freeze
-      @action_id  = RubyAMI.new_uuid
+      @action_id  = action_id || RubyAMI.new_uuid
       @response   = nil
       @complete   = false
       @events     = []
